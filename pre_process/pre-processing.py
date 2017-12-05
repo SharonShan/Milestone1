@@ -4,6 +4,7 @@ import pytesseract
 import argparse
 import cv2
 import os
+import sys
   
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -35,10 +36,17 @@ cv2.imwrite(filename, gray)
 
 # load the image as a PIL/Pillow image, apply OCR, and then delete
 # the temporary file
-#text = pytesseract.image_to_string(Image.open(filename))
+text = pytesseract.image_to_string(Image.open(filename))
+
+# Write text on image to a txt file
+textfile = open('output.txt', 'w')
+textfile.write(text)
+textfile.close()
 #os.remove(filename)
-#print(text)
-   
+print(text)
+
+sys.exit(0)
+
 # show the output images
 #cv2.imshow("Image", image)
 #cv2.imshow("Output", gray)
